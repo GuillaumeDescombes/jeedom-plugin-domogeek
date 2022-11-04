@@ -79,7 +79,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Férié', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'ferie');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -90,7 +89,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Week-End', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'weekend');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -101,7 +99,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vacances scolaires', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'vacances_scolaires');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -112,18 +109,26 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Durée jour', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'duree_jour');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
-      $domogeekCmd->setIsHistorized(1);
+      $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('duree_jour');
       $domogeekCmd->save();        
-      
+
+      $domogeekCmd = new domogeekCmd();
+      $domogeekCmd->setName(__('Durée jour Scenario', __FILE__));
+      $domogeekCmd->setEqLogic_id($this->id);
+      $domogeekCmd->setUnite('');
+      $domogeekCmd->setType('info');
+      $domogeekCmd->setSubType('numeric');
+      $domogeekCmd->setIsHistorized(1);
+      $domogeekCmd->setLogicalId('duree_jour_raw');
+      $domogeekCmd->save();     
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Lever du soleil', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'sunrise');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -134,7 +139,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Zenith', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'zenith');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -145,7 +149,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Coucher du soleil', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'sunset');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -156,7 +159,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Lever du soleil scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'sunrise_raw');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -168,7 +170,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Zenith scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'zenith_raw');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -180,7 +181,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Coucher du soleil scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'sunset_raw');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -192,7 +192,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('IP Publique', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'ip_publique');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -203,7 +202,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Jour Tempo EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'tempo_today');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -214,7 +212,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Demain Tempo EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'tempo_tomorrow');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -225,7 +222,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Jour EJP EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'ejp_today');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -236,7 +232,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Demain EJP EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'ejp_tomorrow');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -247,7 +242,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saison', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'season');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -258,7 +252,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saint du jour', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'feastedsaint');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -269,7 +262,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saint de demain', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'feastedsaint_tomorrow');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -280,7 +272,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vigilance inondation', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'vigilance_inondation');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -291,7 +282,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vigilance météo', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'vigilance_meteo');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -302,7 +292,6 @@
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Type de vigilance', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
-      $domogeekCmd->setConfiguration('data', 'vigilance_type');
       $domogeekCmd->setUnite('');
       $domogeekCmd->setType('info');
       $domogeekCmd->setSubType('string');
@@ -351,62 +340,76 @@
   
     public function getInformations() {
       $url=$this->getConfiguration('url');
-      log::add('domogeek', 'info', "Récupération des données ($url)", 'config');
+      log::add('domogeek', 'info', "Refreshing data ($url)", 'config');
       
       if ($url=="") {
-        log::add('domogeek', 'error', "L'URL ne peut-être vide");
+        log::add('domogeek', 'error', "The URL cannot be empty");
         return;
       }
       
       if (!in_array($this->getConfiguration('zone_scolaire'), array('A','B','C'))) {
-        log::add('domogeek', 'info', "La zone scolaire n'est pas définie (A, B ou C)");
+        log::add('domogeek', 'info', "The 'zone scolaire' is not defined (A, B or C)");
         } else {
           $jsontxt=file_get_contents($url."/holidayall/".$this->getConfiguration('zone_scolaire')."/now",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
           $holidayall=json_decode($jsontxt,true);  
+          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
       if ($this->getConfiguration('ville')=="") {
-        log::add('domogeek', 'info', "La ville n'est pas définie");
+        log::add('domogeek', 'info', "The city is not defined");
         } else {
           $jsontxt=file_get_contents($url."/sun/".$this->getConfiguration('ville')."/all/now",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
-          $sun=json_decode($jsontxt,true);  
+          $sun=json_decode($jsontxt,true);
+          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
       if (!in_array($this->getConfiguration('zone_ejp'), array('nord','sud','ouest','paca'))) {
-        log::add('domogeek', 'info', "La zone EJP n'est pas définie");
+        log::add('domogeek', 'info', "The  'zone EJP' is not defined");
         } else {
           $jsontxt=file_get_contents($url."/ejpedf/".$this->getConfiguration('zone_ejp')."/today/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
           $ejp=json_decode($jsontxt,true);
+          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
           
           $jsontxt=file_get_contents($url."/ejpedf/".$this->getConfiguration('zone_ejp')."/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
           $ejp_tomorrow=json_decode($jsontxt,true);  
+          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
       
       $jsontxt=file_get_contents($url."/season/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $season=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       $jsontxt=file_get_contents($url."/feastedsaint/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $feastedsaint=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       $jsontxt=file_get_contents($url."/feastedsaint/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $feastedsaint_tomorrow=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       $jsontxt=file_get_contents($url."/myip/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $ip_publique=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       $jsontxt=file_get_contents($url."/tempoedf/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $tempo=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       $jsontxt=file_get_contents($url."/tempoedf/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       $tempo_tomorrow=json_decode($jsontxt,true);
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       
       if (!is_numeric($this->getConfiguration('departement')) || strlen($this->getConfiguration('departement'))<>2) {
-        log::add('domogeek', 'info', 'Le département doit être 2 chiffres');
+        log::add('domogeek', 'info', "The 'département' should have 2 digits");
         } else {
-          $jsontxt=file_get_contents($url."/vigilance/".$this->getConfiguration('departement',false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))))."/all");
-          $vigilance=json_decode($jsontxt,true);  
+          $jsontxt=file_get_contents($url."/vigilance/".$this->getConfiguration('departement')."/all",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
+          $vigilance=json_decode($jsontxt,true);
+          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
       
       foreach ($this->getCmd() as $cmd) {
-        if ($cmd->getConfiguration('data')=="ferie") {
+        $logicalId = $cmd->getLogicalId();
+        if ($logicalId == '') $logicalId = $cmd->getConfiguration('data'); //compatibility
+        
+        if ($logicalId=="ferie") {
           if (isset($holidayall['holiday'])) {
             if ($holidayall['holiday']=="False") {
               $cmd->event("Non");
@@ -414,7 +417,7 @@
               $cmd->event($holidayall['holiday']);
             }
           } else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="weekend") {
+        } elseif ($logicalId=="weekend") {
           if (isset($holidayall['weekend'])) {
             if ($holidayall['weekend']=="False") {
               $cmd->event("Non");
@@ -424,7 +427,7 @@
               $cmd->event($holidayall['weekend']);
             }
           } else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="vacances_scolaires") {
+        } elseif ($logicalId=="vacances_scolaires") {
           if (isset($holidayall['schoolholiday'])) {
             if ($holidayall['schoolholiday']=="False"){
               $cmd->event("Non");
@@ -432,28 +435,33 @@
               $cmd->event($holidayall['schoolholiday']);
             }
           } else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="duree_jour") {
+        } elseif ($logicalId=="duree_jour") {
           if (isset($sun['dayduration'])) $cmd->event($sun['dayduration']);
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="sunset") {
+        } elseif ($logicalId=="duree_jour_raw") {
+          if (isset($sun['dayduration'])) {
+            $duration=intval(substr($sun['dayduration'],0,strpos($sun['dayduration'],":")-2))*60 + intval(substr($sun['dayduration'],strpos($sun['dayduration'],":")+1));
+            $cmd->event($duration);
+          } else $cmd->event('Non défini');
+        } elseif ($logicalId=="sunset") {
           if (isset($sun['sunset'])) $cmd->event($sun['sunset']);
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="zenith") {
+        } elseif ($logicalId=="zenith") {
           if (isset($sun['zenith'])) $cmd->event($sun['zenith']);
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="sunrise") {
+        } elseif ($logicalId=="sunrise") {
           if (isset($sun['sunrise'])) $cmd->event($sun['sunrise']);
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="sunset_raw") {
+        } elseif ($logicalId=="sunset_raw") {
           if (isset($sun['sunset'])) $cmd->event(str_replace(':', '', $sun['sunset']));
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="zenith_raw") {
+        } elseif ($logicalId=="zenith_raw") {
           if (isset($sun['zenith'])) $cmd->event(str_replace(':', '', $sun['zenith']));
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="sunrise_raw") {
+        } elseif ($logicalId=="sunrise_raw") {
           if (isset($sun['sunrise'])) $cmd->event(str_replace(':', '', $sun['sunrise']));
             else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="ejp_today") {
+        } elseif ($logicalId=="ejp_today") {
           if (isset($ejp['ejp'])) {
             if($ejp['ejp']=="False"){
               $cmd->event("Non");
@@ -463,7 +471,7 @@
               $cmd->event($ejp['ejp']);
             }
           } else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="ejp_tomorrow") {
+        } elseif ($logicalId=="ejp_tomorrow") {
           if (isset($ejp_tomorrow['ejp'])) {
             if ($ejp_tomorrow['ejp']=="False"){
               $cmd->event("Non");
@@ -473,7 +481,7 @@
               $cmd->event($ejp_tomorrow['ejp']);
             }
           } else $cmd->event('Non défini');
-        } elseif ($cmd->getConfiguration('data')=="season") {
+        } elseif ($logicalId=="season") {
           if (isset($season['season'])) {
             if ($season['season']=="winter"){
               $cmd->event("hiver");
@@ -487,28 +495,28 @@
               $cmd->event($season['season']);
             }
           } else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="ip_publique"){
+        } elseif ($logicalId=="ip_publique"){
           if (isset($ip_publique['myip'])) $cmd->event($ip_publique['myip']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="feastedsaint"){
+        } elseif ($logicalId=="feastedsaint"){
           if (isset($feastedsaint['feastedsaint'])) $cmd->event($feastedsaint['feastedsaint']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="feastedsaint_tomorrow"){
+        } elseif ($logicalId=="feastedsaint_tomorrow"){
           if (isset($feastedsaint_tomorrow['feastedsaint'])) $cmd->event($feastedsaint_tomorrow['feastedsaint']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="tempo_today"){
+        } elseif ($logicalId=="tempo_today"){
           if (isset($tempo['tempocolor'])) $cmd->event($tempo['tempocolor']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="tempo_tomorrow"){
+        } elseif ($logicalId=="tempo_tomorrow"){
           if (isset($tempo_tomorrow['tempocolor'])) $cmd->event($tempo_tomorrow['tempocolor']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="vigilance_inondation"){
+        } elseif ($logicalId=="vigilance_inondation"){
           if (isset($vigilance['vigilanceflood'])) $cmd->event($vigilance['vigilanceflood']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="vigilance_meteo"){
+        } elseif ($logicalId=="vigilance_meteo"){
           if (isset($vigilance['vigilancecolor'])) $cmd->event($vigilance['vigilancecolor']);
             else $cmd->event('Non défini');
-        } elseif($cmd->getConfiguration('data')=="vigilance_type"){
+        } elseif ($logicalId=="vigilance_type"){
           if (isset($vigilance['vigilancerisk'])) $cmd->event($vigilance['vigilancerisk']);
             else $cmd->event('Non défini');
         }
@@ -531,7 +539,7 @@
       $domogeek=$this->getEqLogic();
       $url=$domogeek->getConfiguration('url');
       if ($url=="") {
-        log::add('domogeek', 'error', "L'URL ne peut-être vide");
+        log::add('domogeek', 'error', "The URL cannot be empty");
         return;
       }
       switch ($this->getLogicalId()) {
@@ -539,7 +547,7 @@
           $domogeek->getInformations();
           break;
         default:
-          log::add('domogeek', 'warning', 'Commande inconnue : ' . $this->getLogicalId());
+          log::add('domogeek', 'warning', 'Unknown command: ' . $this->getLogicalId());
       }
       return false;
     }

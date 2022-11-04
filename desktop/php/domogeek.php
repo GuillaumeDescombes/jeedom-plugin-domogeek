@@ -11,16 +11,16 @@
   <div class="col-xs-12 eqLogicThumbnailDisplay">
     <legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
     <div class="eqLogicThumbnailContainer">
+      <div class="cursor eqLogicAction logoPrimary" data-action="add">
+        <i class="fas fa-plus-circle"></i>
+        <br />
+        <span>{{Ajouter}}</span>
+      </div>    
       <div class="cursor eqLogicAction logoSecondary" data-action="gotoPluginConf">
         <i class="fas fa-wrench"></i>
         <br />
         <span>{{Configuration}}</span>
       </div>    
-      <div class="cursor eqLogicAction logoPrimary" data-action="add">
-        <i class="fas fa-plus-circle"></i>
-        <br />
-        <span>{{Ajouter}}</span>
-      </div>
     </div>
     <legend><i class="fas fa-table"></i> {{Mes Equipements}}</legend>
     <input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
@@ -48,97 +48,101 @@
       </span>
     </div>
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
-      <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
-      <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
+			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
+			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
+			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
     </ul>
     <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
       <div role="tabpanel" class="tab-pane active" id="eqlogictab">
-        <br/>
         <form class="form-horizontal">
           <fieldset>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
-              <div class="col-sm-3">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-                <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement template}}"/>
+            <div class="col-lg-6">
+							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
+                <div class="col-sm-3">
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
+                  <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement domogeek}}"/>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label" >{{Objet parent}}</label>
-              <div class="col-sm-3">
-                <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
-                  <option value="">{{Aucun}}</option>
+              <div class="form-group">
+                <label class="col-sm-3 control-label" >{{Objet parent}}</label>
+                <div class="col-sm-3">
+                  <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
+                    <option value="">{{Aucun}}</option>
+                    <?php
+                      $options = '';
+                      foreach ((jeeObject::buildTree(null, false)) as $object) {
+                        $options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
+                      }
+                      echo $options;
+                    ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Catégorie}}</label>
+                <div class="col-sm-9">
                   <?php
-                    $options = '';
-                    foreach ((jeeObject::buildTree(null, false)) as $object) {
-                      $options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
+                    foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
+                      echo '<label class="checkbox-inline">';
+                      echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
+                      echo '</label>';
                     }
-                    echo $options;
                   ?>
-                </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Catégorie}}</label>
-              <div class="col-sm-9">
-                <?php
-                  foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
-                    echo '<label class="checkbox-inline">';
-                    echo '<input type="checkbox" class="eqLogicAttr" data-l1key="category" data-l2key="' . $key . '" />' . $value['name'];
-                    echo '</label>';
-                  }
-                ?>
+              <div class="form-group">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
+                  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label"></label>
-              <div class="col-sm-9">
-                <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
-                <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
+          
+              <legend><i class="fas fa-cogs"></i> {{Paramètres spécifiques}}</legend>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Numéro département}}</label>
+                <div class="col-sm-3">
+                  <input type="text" id="departement" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="departement" placeholder="Département"/>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Numéro département}}</label>
-              <div class="col-sm-3">
-                <input type="text" id="departement" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="departement" placeholder="Département"/>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Ville}}</label>
+                <div class="col-sm-3">
+                  <input type="text" id="ville" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="ville" placeholder="Ville (sans accent)"/>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Ville}}</label>
-              <div class="col-sm-3">
-                <input type="text" id="ville" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="ville" placeholder="Ville (sans accent)"/>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Zone scolaire}}</label>
+                <div class="col-sm-3">
+                  <select class="form-control eqLogicAttr configuration" id="zone_scolaire" data-l1key="configuration" data-l2key="zone_scolaire">
+                    <option value="">--{{Choisir une zone scolaire}}--</option>
+                    <option value="A">Zone A</option>
+                    <option value="B">Zone B</option>
+                    <option value="C">Zone C</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Zone scolaire}}</label>
-              <div class="col-sm-3">
-                <select class="form-control eqLogicAttr configuration" id="zone_scolaire" data-l1key="configuration" data-l2key="zone_scolaire">
-                  <option value="">--{{Choisir une zone scolaire}}--</option>
-                  <option value="A">Zone A</option>
-                  <option value="B">Zone B</option>
-                  <option value="C">Zone C</option>
-                </select>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Zone EJP EDF}}</label>
+                <div class="col-sm-3">
+                  <select class="form-control eqLogicAttr configuration" id="zone_ejp" data-l1key="configuration" data-l2key="zone_ejp">
+                    <option value="">--{{Choisir une zone EJP}}--</option>
+                    <option value="nord">Zone EJP Nord</option>
+                    <option value="sud">Zone EJP Sud</option>
+                    <option value="ouest">Zone EJP Ouest</option>
+                    <option value="paca">Zone EJP PACA</option>
+                  </select>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{Zone EJP EDF}}</label>
-              <div class="col-sm-3">
-                <select class="form-control eqLogicAttr configuration" id="zone_ejp" data-l1key="configuration" data-l2key="zone_ejp">
-                  <option value="">--{{Choisir une zone EJP}}--</option>
-                  <option value="nord">Zone EJP Nord</option>
-                  <option value="sud">Zone EJP Sud</option>
-                  <option value="ouest">Zone EJP Ouest</option>
-                  <option value="paca">Zone EJP PACA</option>
-                </select>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{URL serveur DomoGeek}}</label>
+                <div class="col-sm-3">
+                  <input type="text" id="url" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="url" placeholder=""/>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">{{URL serveur DomoGeek}}</label>
-              <div class="col-sm-3">
-                <input type="text" id="url" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="url" placeholder=""/>
-              </div>
-            </div>
+            </div> 
           </fieldset>
         </form>
       </div>
