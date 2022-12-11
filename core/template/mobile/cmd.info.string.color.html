@@ -1,0 +1,32 @@
+<div class="cmd cmd-widget" data-type="info" data-subtype="string" data-template="default" data-version="#version#" data-eqLogic_id="#eqLogic_id#" data-cmd_id="#id#" data-cmd_uid="#uid#">
+  <span class="cmdName #hide_name#">#name_display#</span> <strong class="state">#state#</strong>
+  <script>
+    jeedom.cmd.addUpdateFunction('#id#',function(_options) {
+      let cmd = $('.cmd[data-cmd_id=#id#]')
+      let v = _options.display_value;
+      switch (v.toUpperCase()) {
+        case 'VERT':
+        case 'NON':
+          v="<i class='fas fa-certificate' style='color: green!important;'></i>";
+          break;
+        case 'JAUNE':
+          v="<i class='fas fa-certificate' style='color: yellow!important;'></i>";
+          break;
+        case 'ROUGE':
+        case 'OUI':
+          v="<i class='fas fa-certificate' style='color: red!important;'></i>";
+          break;
+        case 'BLANC':
+          v="<i class='fas fa-certificate' style='color: lightgrey!important;'></i>";
+          break;          
+        case 'BLEU':
+          v="<i class='fas fa-certificate' style='blue: lightgrey!important;'></i>";
+          break;                    
+      }                    
+      cmd.find('.state').empty().append(v)
+      
+    });
+    
+    jeedom.cmd.refreshValue([{cmd_id :'#id#',display_value: '#state#', valueDate: '#valueDate#', collectDate: '#collectDate#', alertLevel: '#alertLevel#', unit: '#unite#'}])
+  </script>
+</div>
