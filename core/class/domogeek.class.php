@@ -15,29 +15,28 @@
     * You should have received a copy of the GNU General Public License
     * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
   */
-  
-  /* * ***************************Includes********************************* */
+
+  /* ****************************Includes********************************* */
   require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-  
+
   class domogeek extends eqLogic {
-    /*     * *************************Attributs****************************** */
-    
-    
-    /*     * ***********************Methode static*************************** */
-    
+    /* **************************Attributs****************************** */
+
+    /* ************************Methode static*************************** */
+
    /*
   public static function cron() {
   }
   */
 
-  /*     
+  /*
   public static function cron5() {
   }
   */
 
   /*
-	public static function cron15() {
-	}
+  public static function cron15() {
+  }
   */
 
   /*
@@ -47,27 +46,23 @@
 
   /*
   public static function cronDaily() {
-  }  
+  }
   */
- 
- 
+
     public static function pull() {
       foreach (eqLogic::byType('domogeek') as $domogeek) {
         $domogeek->getInformations();
       }
-      
     }
-    
-    
-    /*     * *********************Methode d'instance************************* */
+
+    /* **********************Methode d'instance************************* */
 
   /*
     public function preInsert() {
-  	}
+    }
   */
 
     public function postInsert() {
-      
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Rafraichir', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -75,7 +70,7 @@
       $domogeekCmd->setSubType('other');
       $domogeekCmd->setLogicalId('refresh');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Férié', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -85,7 +80,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('ferie');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Week-End', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -95,7 +90,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('weekend');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vacances scolaires', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -105,7 +100,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('vacances_scolaires');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Durée jour', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -114,7 +109,7 @@
       $domogeekCmd->setSubType('string');
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('duree_jour');
-      $domogeekCmd->save();        
+      $domogeekCmd->save();
 
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Durée jour Scenario', __FILE__));
@@ -124,7 +119,7 @@
       $domogeekCmd->setSubType('numeric');
       $domogeekCmd->setIsHistorized(1);
       $domogeekCmd->setLogicalId('duree_jour_raw');
-      $domogeekCmd->save();     
+      $domogeekCmd->save();
 
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Lever du soleil', __FILE__));
@@ -135,7 +130,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('sunrise');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Zenith', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -145,7 +140,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('zenith');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Coucher du soleil', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -155,7 +150,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('sunset');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Lever du soleil scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -166,7 +161,7 @@
       $domogeekCmd->setIsVisible(0);
       $domogeekCmd->setLogicalId('sunrise_raw');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Zenith scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -177,7 +172,7 @@
       $domogeekCmd->setIsVisible(0);
       $domogeekCmd->setLogicalId('zenith_raw');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Coucher du soleil scénario', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -188,7 +183,7 @@
       $domogeekCmd->setIsVisible(0);
       $domogeekCmd->setLogicalId('sunset_raw');
       $domogeekCmd->save();
-            
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Jour Tempo EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -198,7 +193,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('tempo_today');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Demain Tempo EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -208,7 +203,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('tempo_tomorrow');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Jour EJP EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -218,7 +213,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('ejp_today');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Demain EJP EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -228,7 +223,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('ejp_tomorrow');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saison', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -238,7 +233,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('season');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saint du jour', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -248,7 +243,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('feastedsaint');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Saint de demain', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -258,7 +253,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('feastedsaint_tomorrow');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vigilance inondation', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -268,7 +263,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('vigilance_inondation');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vigilance météo', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -278,7 +273,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('vigilance_meteo');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Type de vigilance', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -288,7 +283,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('vigilance_type');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Jour EcoWatt EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -298,7 +293,7 @@
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('ecowatt_today');
       $domogeekCmd->save();
-      
+
       $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Demain EcoWatt EDF', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
@@ -307,56 +302,47 @@
       $domogeekCmd->setSubType('string');
       $domogeekCmd->setIsHistorized(0);
       $domogeekCmd->setLogicalId('ecowatt_tomorrow');
-      $domogeekCmd->save();      
-      
+      $domogeekCmd->save();
     }
-   
+
     public function preUpdate() {
       if ($this->getConfiguration('url')=="") {
         throw new Exception(__("L'URL ne peut-être vide", __FILE__));
       }
     }
-  
+
   /*
-  public function postUpdate() {
-  
-  }
-  */
-    
-  
-  /*  
-  public function preRemove() {
-        
-  }
+    public function postUpdate() {
+    }
   */
 
   /*
-  public function postRemove() {
-        
-  } 
+    public function preRemove() {
+    }
   */
 
   /*
-  public function preSave() {
-        
-  }
-  */  
-	
-  /*
-	public function postSave() {
-  
-  }
+    public function postRemove() {
+    }
   */
-  
+
+  /*
+    public function preSave() {
+    }
+  */
+
+  /*
+    public function postSave() {
+    }
+  */
+
     public function getInformations() {
       $url=$this->getConfiguration('url');
       log::add('domogeek', 'info', "Refreshing data ($url)", 'config');
-      
       if ($url=="") {
         log::add('domogeek', 'error', "The URL cannot be empty");
         return;
       }
-      
       if (!in_array($this->getConfiguration('zone_scolaire'), array('A','B','C'))) {
         log::add('domogeek', 'info', "The 'zone scolaire' is not defined (A, B or C)");
         } else {
@@ -370,71 +356,66 @@
         } else {
           $jsontxt=file_get_contents($url."/sun/".$this->getConfiguration('ville')."/all/now",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
           if ($jsontxt!==false) $sun=json_decode($jsontxt,true);
-            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/sun)");          
+            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/sun)");
           if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
-      if (!in_array($this->getConfiguration('zone_ejp'), array('nord','sud','ouest','paca'))) {
-        log::add('domogeek', 'info', "The  'zone EJP' is not defined");
-        } else {
-          $jsontxt=file_get_contents($url."/ejpedf/".$this->getConfiguration('zone_ejp')."/today/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
-          if ($jsontxt!==false) $ejp=json_decode($jsontxt,true);
-            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");           
-          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-          
-          $jsontxt=file_get_contents($url."/ejpedf/".$this->getConfiguration('zone_ejp')."/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
-          if ($jsontxt!==false) $ejp_tomorrow=json_decode($jsontxt,true);
-            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");           
-          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      }
-      
+      $jsontxt=file_get_contents($url."/ejpedf/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
+      if ($jsontxt!==false) $ejp=json_decode($jsontxt,true);
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
+
+      $jsontxt=file_get_contents($url."/ejpedf/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
+      if ($jsontxt!==false) $ejp_tomorrow=json_decode($jsontxt,true);
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");
+      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
+
       $jsontxt=file_get_contents($url."/season/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $season=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/season)");                
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/season)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      
+
       $jsontxt=file_get_contents($url."/feastedsaint/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $feastedsaint=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/feastedsaint)");                
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/feastedsaint)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      
+
       $jsontxt=file_get_contents($url."/feastedsaint/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $feastedsaint_tomorrow=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/feastedsaint)");         
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/feastedsaint)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-            
+
       $jsontxt=file_get_contents($url."/tempoedf/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $tempo=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/tempoedf)");               
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/tempoedf)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      
+
       $jsontxt=file_get_contents($url."/tempoedf/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $tempo_tomorrow=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/tempoedf)");            
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/tempoedf)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      
+
       if (!is_numeric($this->getConfiguration('departement')) || strlen($this->getConfiguration('departement'))<>2) {
         log::add('domogeek', 'info', "The 'département' should have 2 digits");
         } else {
           $jsontxt=file_get_contents($url."/vigilance/".$this->getConfiguration('departement')."/all",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
           if ($jsontxt!==false) $vigilance=json_decode($jsontxt,true);
-            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/vigilance)");            
+            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/vigilance)");
           if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
 
       $jsontxt=file_get_contents($url."/ecowattedf/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $ecowatt=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ecowattedf)");               
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ecowattedf)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      
+
       $jsontxt=file_get_contents($url."/ecowattedf/tomorrow/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $ecowatt_tomorrow=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ecowattedf)");            
+        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ecowattedf)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
 
       foreach ($this->getCmd() as $cmd) {
         $logicalId = $cmd->getLogicalId();
         if ($logicalId == '') $logicalId = $cmd->getConfiguration('data'); //compatibility
-        
         if ($logicalId=="ferie") {
           if (isset($holidayall['holiday'])) {
             if ($holidayall['holiday']=="False") {
@@ -552,18 +533,18 @@
       }
       return ;
     }
-    
-     /*     * **********************Getteur Setteur*************************** */   
-    
+
+     /* ***********************Getteur Setteur*************************** */
+
   }
-  
+
   class domogeekCmd extends cmd {
-    /*     * *************************Attributs****************************** */
-    
-    
-    /*     * ***********************Methode static*************************** */
-    
-    /*     * *********************Methode d'instance************************* */
+    /* **************************Attributs****************************** */
+
+
+    /* ************************Methode static*************************** */
+
+    /* **********************Methode d'instance************************* */
     public function execute($_options = array()) {
       $domogeek=$this->getEqLogic();
       $url=$domogeek->getConfiguration('url');
@@ -581,5 +562,5 @@
       return false;
     }
   }
-  
+
 ?>

@@ -48,16 +48,16 @@
       </span>
     </div>
     <ul class="nav nav-tabs" role="tablist">
-			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
-			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
-			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
+      <li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
+      <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
+      <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list"></i> {{Commandes}}</a></li>
     </ul>
     <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
       <div role="tabpanel" class="tab-pane active" id="eqlogictab">
         <form class="form-horizontal">
           <fieldset>
             <div class="col-lg-6">
-							<legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
+              <legend><i class="fas fa-wrench"></i> {{Paramètres généraux}}</legend>
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Nom de l'équipement}}</label>
                 <div class="col-sm-3">
@@ -125,18 +125,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Zone EJP EDF}}</label>
-                <div class="col-sm-3">
-                  <select class="form-control eqLogicAttr configuration" id="zone_ejp" data-l1key="configuration" data-l2key="zone_ejp">
-                    <option value="">--{{Choisir une zone EJP}}--</option>
-                    <option value="nord">Zone EJP Nord</option>
-                    <option value="sud">Zone EJP Sud</option>
-                    <option value="ouest">Zone EJP Ouest</option>
-                    <option value="paca">Zone EJP PACA</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
                 <label class="col-sm-3 control-label">{{URL serveur DomoGeek}}</label>
                 <div class="col-sm-3">
                   <input type="text" id="url" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="url" placeholder=""/>
@@ -148,11 +136,11 @@
       </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
         <a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Ajouter une Commande}}</a><br/><br/>
-				
+        
         <table id="table_cmd" class="table table-bordered table-condensed">
-					<thead>
-						<tr>
-							<th>{{Nom}}</th>
+          <thead>
+            <tr>
+              <th>{{Nom}}</th>
               <th style="width: 130px;">{{Type}}</th>
               <th>{{Nom logique}}</th>
               <th style="width: 300px;">{{Paramètres}}</th>
@@ -160,7 +148,7 @@
               <th style="width: 150px;">{{Action}}</th>
             </tr>
           </thead>
-					<tbody>
+          <tbody>
           </tbody>
         </table>
       </div>
