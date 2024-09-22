@@ -265,6 +265,16 @@
       $domogeekCmd->save();
 
       $domogeekCmd = new domogeekCmd();
+      $domogeekCmd->setName(__('Vigilance orage', __FILE__));
+      $domogeekCmd->setEqLogic_id($this->id);
+      $domogeekCmd->setUnite('');
+      $domogeekCmd->setType('info');
+      $domogeekCmd->setSubType('string');
+      $domogeekCmd->setIsHistorized(0);
+      $domogeekCmd->setLogicalId('vigilance_orage');
+      $domogeekCmd->save();
+
+      $domogeekCmd = new domogeekCmd();
       $domogeekCmd->setName(__('Vigilance météo', __FILE__));
       $domogeekCmd->setEqLogic_id($this->id);
       $domogeekCmd->setUnite('');
@@ -516,6 +526,9 @@
             //else $cmd->event('Non défini');
         } elseif ($logicalId=="vigilance_inondation"){
           if (isset($vigilance['vigilanceflood'])) $cmd->event($vigilance['vigilanceflood']);
+            //else $cmd->event('Non défini');
+        } elseif ($logicalId=="vigilance_orage"){
+          if (isset($vigilance['vigilancestorm'])) $cmd->event($vigilance['vigilancestorm']);
             //else $cmd->event('Non défini');
         } elseif ($logicalId=="vigilance_meteo"){
           if (isset($vigilance['vigilancecolor'])) $cmd->event($vigilance['vigilancecolor']);
