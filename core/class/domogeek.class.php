@@ -361,14 +361,12 @@
             else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/holidayall)");
           if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
       }
-      if ($this->getConfiguration('ville')=="") {
-        log::add('domogeek', 'info', "The city is not defined");
-        } else {
-          $jsontxt=file_get_contents($url."/sun/".$this->getConfiguration('ville')."/all/now",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
-          if ($jsontxt!==false) $sun=json_decode($jsontxt,true);
-            else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/sun)");
-          if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
-      }
+      //replacing the apidomogeek by php code
+      $isWeekEnd = (date('N', strtotime($date)) >= 6);
+ 
+      //replacing the apidomogeek by php code
+      $sun=date_sun_info(time(), config::byKey("info::latitude"), config::byKey("info::longitude"));
+
       $jsontxt=file_get_contents($url."/ejpedf/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $ejp=json_decode($jsontxt,true);
         else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");
@@ -379,10 +377,20 @@
         else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/ejpedf)");
       if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
 
-      $jsontxt=file_get_contents($url."/season/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
-      if ($jsontxt!==false) $season=json_decode($jsontxt,true);
-        else log::add('domogeek', 'error', "Cannot get data from API DOMOGEEK (/season)");
-      if (json_last_error()!=JSON_ERROR_NONE) log::add('domogeek', 'error', "Cannot decode '".$jsontxt."': ".json_last_error_msg());
+      //replacing the apidomogeek by php code for season
+      $seasonDates = array('/12/21'=>'hiver',
+                           '/09/21'=>'automne',
+                           '/06/21'=>'été',
+                           '/03/21'=>'printemps',
+                           '/01/01'=>'hiver');
+      $season="";
+      foreach ($seasonDates AS $key => $value) {
+        $SeasonDate = date("Y").$key;
+        if (strtotime("now") > strtotime(date("Y").$key)) {
+          $season = $value;
+          break;
+        }
+      }
 
       $jsontxt=file_get_contents($url."/feastedsaint/now/json",false,stream_context_create(array('http' => array('user_agent' => 'jeedom'))));
       if ($jsontxt!==false) $feastedsaint=json_decode($jsontxt,true);
@@ -435,15 +443,11 @@
             }
           } //else $cmd->event('Non défini');
         } elseif ($logicalId=="weekend") {
-          if (isset($holidayall['weekend'])) {
-            if ($holidayall['weekend']=="False") {
+          if ($isWeekEnd) {
+            $cmd->event("Oui");
+          } else {
               $cmd->event("Non");
-            } elseif ($holidayall['weekend']=="True") {
-              $cmd->event("Oui");
-            } else {
-              $cmd->event($holidayall['weekend']);
             }
-          } //else $cmd->event('Non défini');
         } elseif ($logicalId=="vacances_scolaires") {
           if (isset($holidayall['schoolholiday'])) {
             if ($holidayall['schoolholiday']=="False"){
@@ -453,31 +457,23 @@
             }
           } //else $cmd->event('Non défini');
         } elseif ($logicalId=="duree_jour") {
-          if (isset($sun['dayduration'])) $cmd->event($sun['dayduration']);
-            //else $cmd->event('Non défini');
+          $diff = $sun['sunset'] - $sun['sunrise'];
+          $cmd->event(date("H:i", $diff));
         } elseif ($logicalId=="duree_jour_raw") {
-          if (isset($sun['dayduration'])) {
-            $duration=intval(substr($sun['dayduration'],0,strpos($sun['dayduration'],":")-2))*60 + intval(substr($sun['dayduration'],strpos($sun['dayduration'],":")+1));
-            $cmd->event($duration);
-          } //else $cmd->event('Non défini');
+          $diff = $sun['sunset'] - $sun['sunrise'];
+          $cmd->event(date("Gi", $diff));
         } elseif ($logicalId=="sunset") {
-          if (isset($sun['sunset'])) $cmd->event($sun['sunset']);
-            //else $cmd->event('Non défini');
+          $cmd->event(date("H:i", $sun['sunset']));
         } elseif ($logicalId=="zenith") {
-          if (isset($sun['zenith'])) $cmd->event($sun['zenith']);
-            //else $cmd->event('Non défini');
+          $cmd->event(date("H:i", $sun['transit']));
         } elseif ($logicalId=="sunrise") {
-          if (isset($sun['sunrise'])) $cmd->event($sun['sunrise']);
-            //else $cmd->event('Non défini');
+          $cmd->event(date("H:i", $sun['sunrise']));
         } elseif ($logicalId=="sunset_raw") {
-          if (isset($sun['sunset'])) $cmd->event(str_replace(':', '', $sun['sunset']));
-            //else $cmd->event('Non défini');
+          $cmd->event(date("Gi", $sun['sunset']));
         } elseif ($logicalId=="zenith_raw") {
-          if (isset($sun['zenith'])) $cmd->event(str_replace(':', '', $sun['zenith']));
-            //else $cmd->event('Non défini');
+          $cmd->event(date("Gi", $sun['transit']));
         } elseif ($logicalId=="sunrise_raw") {
-          if (isset($sun['sunrise'])) $cmd->event(str_replace(':', '', $sun['sunrise']));
-            //else $cmd->event('Non défini');
+          $cmd->event(date("Gi", $sun['sunrise']));
         } elseif ($logicalId=="ejp_today") {
           if (isset($ejp['ejp'])) {
             if($ejp['ejp']=="False"){
@@ -499,19 +495,7 @@
             }
           } //else $cmd->event('Non défini');
         } elseif ($logicalId=="season") {
-          if (isset($season['season'])) {
-            if ($season['season']=="winter"){
-              $cmd->event("hiver");
-            } elseif ($season['season']=="spring")  {
-              $cmd->event("printemps");
-            } elseif  ($season['season']=="summer") {
-              $cmd->event("été");
-            } elseif  ($season['season']=="fall" || $season['season']=="autumn")  {
-              $cmd->event("automne");
-            } else {
-              $cmd->event($season['season']);
-            }
-          } //else $cmd->event('Non défini');
+            $cmd->event($season);
         } elseif ($logicalId=="feastedsaint"){
           if (isset($feastedsaint['feastedsaint'])) $cmd->event($feastedsaint['feastedsaint']);
             //else $cmd->event('Non défini');

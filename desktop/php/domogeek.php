@@ -108,12 +108,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-3 control-label">{{Ville}}</label>
-                <div class="col-sm-3">
-                  <input type="text" id="ville" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="ville" placeholder="Ville (sans accent)"/>
-                </div>
-              </div>
-              <div class="form-group">
                 <label class="col-sm-3 control-label">{{Zone scolaire}}</label>
                 <div class="col-sm-3">
                   <select class="form-control eqLogicAttr configuration" id="zone_scolaire" data-l1key="configuration" data-l2key="zone_scolaire">
