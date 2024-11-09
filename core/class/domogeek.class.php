@@ -457,10 +457,10 @@
             }
           } //else $cmd->event('Non défini');
         } elseif ($logicalId=="duree_jour") {
-          $diff = $sun['sunset'] - $sun['sunrise'];
+          $diff = $sun['sunset'] - $sun['sunrise'] - 3600;
           $cmd->event(date("H:i", $diff));
         } elseif ($logicalId=="duree_jour_raw") {
-          $diff = $sun['sunset'] - $sun['sunrise'];
+          $diff = $sun['sunset'] - $sun['sunrise'] - 3600;
           $cmd->event(date("Gi", $diff));
         } elseif ($logicalId=="sunset") {
           $cmd->event(date("H:i", $sun['sunset']));
