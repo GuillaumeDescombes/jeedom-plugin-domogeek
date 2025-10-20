@@ -104,26 +104,42 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Numéro département}}</label>
                 <div class="col-sm-3">
-                  <input type="text" id="departement" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="departement" placeholder="Département"/>
+                  <input type="text" id="departement" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="departement" placeholder="{{Département}}"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Latitude}}</label>
+                <div class="col-sm-3">
+                  <input type="text" id="latitude" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="latitude" placeholder="{{Latitude}}"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">{{Longitude}}</label>
+                <div class="col-sm-3">
+                  <input type="text" id="longitude" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="longitude" placeholder="{{Longitude}}"/>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{Zone scolaire}}</label>
                 <div class="col-sm-3">
                   <select class="form-control eqLogicAttr configuration" id="zone_scolaire" data-l1key="configuration" data-l2key="zone_scolaire">
-                    <option value="">--{{Choisir une zone scolaire}}--</option>
+                    <option value="Auto">Automatique</option>
                     <option value="A">Zone A</option>
                     <option value="B">Zone B</option>
                     <option value="C">Zone C</option>
+                    <option value="Corse">Zone Corse</option>
+                    <option value="None">Aucune</option>
                   </select>
                 </div>
               </div>
+<!--
               <div class="form-group">
                 <label class="col-sm-3 control-label">{{URL serveur DomoGeek}}</label>
                 <div class="col-sm-3">
                   <input type="text" id="url" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="url" placeholder=""/>
                 </div>
               </div>
+-->
             </div> 
           </fieldset>
         </form>
